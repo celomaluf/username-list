@@ -1,0 +1,41 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<div ng-include="'webui/view/common/header.html'"></div>
+
+<div class="jumbotron">
+    <h2 class="text-center">Username List</h2>
+</div>
+
+<p ng-show="warningMessage.length" class="alert alert-warning text-center">{{warningMessage}}</p>
+<p ng-show="successMessage.length" class="alert alert-success text-center">{{successMessage}}</p>
+
+<form novalidate name="form" class="row" ng-submit="addUsername()">
+ 	<div class="col-md-4 center"></div>
+    <div class="col-md-4 center">
+		<div class="form-group">
+           <label>Username*</label>
+           <input name="username" class="form-control" ng-model="username" required ng-minlength="6">
+           <span ng-show = "form.$submitted && form.username.$error.required" class="form-control alert-danger">
+               Required field
+           </span>
+           <span ng-show="form.$submitted && form.username.$error.minlength" class="form-control alert-danger">
+               The username should be at least 6 characters long
+            </span>
+		</div> 
+	   	<div class="form-group" ng-show="result.possibleUsernames.length" >
+			<label>Possible Usernames</label>
+	   		<textarea class="extended" type="textarea" rows="3" disabled >{{result.possibleUsernames.toString()}}</textarea>
+	   	</div>
+	  
+		<div class="form-group text-right">
+			<button type="submit" class="btn btn-primary extended" ng-disabled="form.$invalid || isDisabled" ng-click="disableButton()")>
+		      Add Username
+			</button>
+		</div>
+        <div class="form-group text-right">	        
+	        <a href="#/dictionary" class="btn btn-primary extended" >Dictionary of Words</a>
+        </div>
+        <hr>
+    </div>
+    <div class="col-md-4 center"></div>		   
+</form>
+<div ng-include="'webui/view/common/footer.html'"></div>
